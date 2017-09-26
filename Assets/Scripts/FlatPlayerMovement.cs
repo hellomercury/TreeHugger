@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class FlatPlayerMovement : MonoBehaviour {
 
     private Rigidbody rgb;
     public float floatSpeed = 5f;
@@ -22,10 +22,8 @@ public class PlayerMovement : MonoBehaviour {
         float inX = Input.GetAxis("Horizontal");
         float inZ = Input.GetAxis("Z");
         float inY = Input.GetAxis("Jump");
-        rgb.AddForce(speed * (inX * horizontalMove));
-        rgb.AddForce(speed * (inZ * depthMove));
-        rgb.AddForce(speed * (inY * jumpMove));
-        rgb.angularDrag = 0f;
+        rgb.velocity = new Vector3(floatSpeed * inX, 0, floatSpeed * inZ);
+        rgb.AddForce(new Vector3(0, inY * 200f, 0));
     }
 
 
