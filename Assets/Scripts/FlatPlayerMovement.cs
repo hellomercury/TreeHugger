@@ -19,20 +19,13 @@ public class FlatPlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //use get button down for attacks uses axis name
         float inX = Input.GetAxis("Horizontal");
         float inZ = Input.GetAxis("Z");
         float inY = Input.GetAxis("Jump");
-        rgb.velocity = new Vector3(floatSpeed * inX, 0, floatSpeed * inZ);
-        rgb.AddForce(new Vector3(0, inY * 200f, 0));
+        rgb.velocity = new Vector3(floatSpeed * inX, rgb.velocity.y, floatSpeed * inZ);
+        rgb.AddForce(new Vector3(0, inY * 10f, 0));
     }
 
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Edge"))
-        {
-            rgb.angularVelocity = Vector3.zero;
-
-        }
-    }
 }
