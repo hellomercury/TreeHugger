@@ -44,8 +44,8 @@ public class JumpingState : RunnerState
 {
     private float floatSpeed = 5f;
     private Rigidbody rgb;
-    private int timeTillJump = 1;
-    private float timer = 1;
+    private float timeTillJump = 1.5f;
+    private float timer = 1.5f;
 
 
     public override void handleInput(Runner runner) {

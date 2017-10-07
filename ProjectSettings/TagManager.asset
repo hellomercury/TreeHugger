@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 574870843
+    locked: 0
+  - name: Halo
+    uniqueID: 3969570667
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

@@ -14,13 +14,17 @@ public class Runner : MonoBehaviour {
 
     //private Rigidbody rgb;
     private RunnerState state;
-    public float velY;
+    private Animator anim;
+    public int action;
+
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         state = RunnerState.running;
-        velY = GetComponent<Rigidbody>().velocity.y;
+        anim = GetComponent<Animator>();
     }
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -33,10 +37,13 @@ public class Runner : MonoBehaviour {
         switch(newState)
         {
             case State.run:
-                 state = RunnerState.running;
-                 break;
+                state = RunnerState.running;
+                anim.SetInteger("action", 0);
+                break;
             case State.jump:
                 state = RunnerState.jumping;
+                anim.SetInteger("action", 1);
+                action = 2;
                 break;
             case State.duck:
                 state = RunnerState.ducking;
