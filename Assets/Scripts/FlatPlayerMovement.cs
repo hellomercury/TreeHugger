@@ -6,8 +6,7 @@ public class FlatPlayerMovement : MonoBehaviour {
 
     private Rigidbody rgb;
     public float floatSpeed = 5f;
-    private float speed = 20f;
-    private 
+
 
     // Use this for initialization
     void Start () {

@@ -16,6 +16,7 @@ public class Runner : MonoBehaviour {
     private RunnerState state;
     private Animator anim;
     public int action;
+    public Vector3 startingPos;
 
 
     // Use this for initialization
@@ -23,6 +24,7 @@ public class Runner : MonoBehaviour {
     {
         state = RunnerState.running;
         anim = GetComponent<Animator>();
+        startingPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
     }
 
 	
@@ -50,6 +52,18 @@ public class Runner : MonoBehaviour {
                 break;
         }
 
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Death"))
+        {
+            transform.position = startingPos;
+        }
+        else if (other.gameObject.layer == LayerMask.NameToLayer("BackEdge"))
+        {
+            transform.position = startingPos;
+        }
     }
 
 }
