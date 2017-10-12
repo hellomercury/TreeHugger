@@ -11,9 +11,9 @@ public class PassingObjects : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        speed = -15f;
+        speed = -10f;
         rgb = GetComponent<Rigidbody>();
-        frames = 5;
+        frames = 8;
         die = false;
 	}
 	

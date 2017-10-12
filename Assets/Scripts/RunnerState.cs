@@ -106,6 +106,7 @@ public class TripState : RunnerState
 public class DeathState : RunnerState
 {
 
+    //DO NOTHING IN DEATH STATE
     public override void handleInput(Runner runner)
     {
     }

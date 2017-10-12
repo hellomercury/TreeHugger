@@ -5,11 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class TitleScreen : MonoBehaviour
 {
-
+    private AudioSource aud;
     // Use this for initialization
     void Start()
     {
-
     }
 
     // Update is called once per frame

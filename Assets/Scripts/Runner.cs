@@ -21,13 +21,14 @@ public class Runner : MonoBehaviour {
     private GameObject endCanvas;
     private Collider col;
     private bool dead = false;
+    private AudioSource fall;
 
 
     // Use this for initialization
     void Start()
     {
         endCanvas = Resources.Load<GameObject>("Prefabs/EndCanvas");
-
+        fall = GetComponent<AudioSource>();
         rgb = GetComponent<Rigidbody>();
         state = RunnerState.running;
         anim = GetComponent<Animator>();
@@ -54,8 +55,10 @@ public class Runner : MonoBehaviour {
                 anim.SetInteger("action", 1);
                 break;
             case State.trip:
+                rgb.velocity = new Vector3(0, rgb.velocity.y, 0);
                 state = RunnerState.tripping;
                 anim.SetInteger("action", 2);
+                fall.Play();
                 break;
             case State.die:
                 state = RunnerState.dying;
@@ -69,7 +72,7 @@ public class Runner : MonoBehaviour {
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
-            if (state != RunnerState.tripping)
+            if (state != RunnerState.tripping && state != RunnerState.dying)
             {
                 ChangeState(State.trip);
             }

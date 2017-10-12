@@ -37,7 +37,7 @@ public class ObstacleManager : MonoBehaviour {
         ground = GameObject.Find("Ground");
         groundSize = ground.GetComponent<Renderer>().bounds.size;
         groundPos = ground.transform.position;
-        zEnd = groundPos[2] + (groundSize[2] /2) - 1;
+        zEnd = groundPos[2] + (groundSize[2] /2);
         zStart = groundPos[2] - (groundSize[2] / 2) + 1;
         xStart = groundPos[0] + (groundSize[0] / 2) + 2;
 
