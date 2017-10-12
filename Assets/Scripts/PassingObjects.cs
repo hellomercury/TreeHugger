@@ -27,6 +27,7 @@ public class PassingObjects : MonoBehaviour {
             if (frames <= 0)
             {
                 gameObject.SetActive(false);
+                die = false;
             }
         }
     }
@@ -35,6 +36,7 @@ public class PassingObjects : MonoBehaviour {
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("BackEdge"))
         {
+
             die = true;
         }
     }

@@ -6,7 +6,8 @@ public enum State
 {
     run,
     jump,
-    duck
+    trip,
+    die
 }
 
 
@@ -15,13 +16,19 @@ public class Runner : MonoBehaviour {
     //private Rigidbody rgb;
     private RunnerState state;
     private Animator anim;
-    public int action;
     public Vector3 startingPos;
+    private Rigidbody rgb;
+    private GameObject endCanvas;
+    private Collider col;
+    private bool dead = false;
 
 
     // Use this for initialization
     void Start()
     {
+        endCanvas = Resources.Load<GameObject>("Prefabs/EndCanvas");
+
+        rgb = GetComponent<Rigidbody>();
         state = RunnerState.running;
         anim = GetComponent<Animator>();
         startingPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -45,10 +52,14 @@ public class Runner : MonoBehaviour {
             case State.jump:
                 state = RunnerState.jumping;
                 anim.SetInteger("action", 1);
-                action = 2;
                 break;
-            case State.duck:
-                state = RunnerState.ducking;
+            case State.trip:
+                state = RunnerState.tripping;
+                anim.SetInteger("action", 2);
+                break;
+            case State.die:
+                state = RunnerState.dying;
+                anim.SetInteger("action", 3);
                 break;
         }
 
@@ -56,13 +67,24 @@ public class Runner : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Death"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
-            transform.position = startingPos;
+            if (state != RunnerState.tripping)
+            {
+                ChangeState(State.trip);
+            }
         }
         else if (other.gameObject.layer == LayerMask.NameToLayer("BackEdge"))
         {
-            transform.position = startingPos;
+            if (!dead)
+            {
+                rgb.velocity = new Vector3(0, 0, 0);
+                rgb.position = new Vector3(transform.position.x + .75f, transform.position.y, transform.position.z);
+                ChangeState(State.die);
+                Instantiate(endCanvas);
+                endCanvas.SetActive(true);
+                dead = true;
+            }
         }
     }
 
